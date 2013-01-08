@@ -1,0 +1,24 @@
+.bs-docs-example {
+	position: relative;
+	margin: 15px 0;
+	padding: 39px 19px 14px;
+	background-color: white;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	background-color: #EEEEEE;
+}
+.bs-docs-example + .prettyprint {
+	margin-top: -20px;
+	padding-top: 15px;
+}
+pre.prettyprint {
+	margin-bottom: 20px;
+	background-color: #DFDFDF;
+}
+.prettyprint {
+	padding: 8px;
+	background-color: #F7F7F9;
+	border: 1px solid #E1E1E8;
+}
