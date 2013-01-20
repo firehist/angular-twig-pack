@@ -72,7 +72,25 @@ function MainCtrl($scope, $filter) {
     $scope.objKeys = {'key1':0,'key2':1};
     console.debug('Filter keys with array', $scope.arrKeys, '___', $filter('keys')($scope.arrKeys));
     console.debug('Filter keys with object', $scope.objKeys, '___', $filter('keys')($scope.objKeys));
+	
+	// escape
+	$scope.strHTML	= '<p><strong>My</strong> exemple!</p>';
+	$scope.strURL	= 'http://www.frangular.com/2013/01/angularjs-service-raccourcis-clavier.html';
+	$scope.strJS	= '<script type="text/javascript">(function() { var a=window,b="jstiming",d="tick";</script>';
+    console.debug('Filter escape HTML', $scope.strHTML, '___', $filter('escape')($scope.strHTML));
+    console.debug('Filter escape URL', $scope.strURL, '___', $filter('escape')($scope.strURL, 'url'));
+    console.debug('Filter escape JS', $scope.strJS, '___', $filter('escape')($scope.strJS, 'js'));
 
+	// abs
+	$scope.strABS	= -5;
+    console.debug('Filter abs', $scope.strABS, '___', $filter('abs')($scope.strABS));
 
-
+	// nl2br
+	$scope.strNL2BR	= 'FR\nangular\nJS';
+    console.debug('Filter nl2br', $scope.strNL2BR, '___', $filter('nl2br')($scope.strNL2BR));
+	
+	// number_format
+	$scope.strNumberFormat	= '1 000,50';
+    console.debug('Filter number_format', $scope.strNumberFormat, '___', $filter('number_format')($scope.strNumberFormat, 2, '.', ' '));
+	
 }

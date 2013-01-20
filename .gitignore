@@ -1,2 +1,4 @@
 .idea
 !.empty
+/nbproject/private/
+/nbproject

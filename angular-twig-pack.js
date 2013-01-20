@@ -131,7 +131,8 @@ angular.module('twig.filters').filter('lower', function () {
  * striptag
  *
  * @author http://kevin.vanzonneveld.net
- * @example: 'MY TITLE TO TITLED' | upper // my title to titled
+ * @example: 'MY TITLE TO TITLED' | upper 
+ *		#returns 'my title to titled'
  */
 angular.module('twig.filters').filter('striptags', function () {
     return function (value, allowed) {
@@ -152,8 +153,10 @@ angular.module('twig.filters').filter('striptags', function () {
  *
  * @param separator {string} The separator to join each array item
  *
- * @example: [0,1,2] | join #returns 012
- * @example: [0,1,2] | join:('|') #returns 0|1|2
+ * @example: [0,1,2] | join
+ *		#returns 012
+ * @example: [0,1,2] | join:('|')
+ *		#returns 0|1|2
  */
 angular.module('twig.filters').filter('join', function () {
     return function (value, separator) {
@@ -167,8 +170,10 @@ angular.module('twig.filters').filter('join', function () {
 /**
  * reverse
  *
- * @example: '01234' | reverse #returns 43210
- * @example: [0,1,2] | reverse #returns [2,1,0]
+ * @example: '01234' | reverse
+ *		#returns 43210
+ * @example: [0,1,2] | reverse
+ *		#returns [2,1,0]
  */
 angular.module('twig.filters').filter('reverse', function () {
     return function (value) {
@@ -185,8 +190,10 @@ angular.module('twig.filters').filter('reverse', function () {
 /**
  * length
  *
- * @example: '01234' | reverse #returns 5
- * @example: [0,1,2] | reverse #returns 3
+ * @example: '01234' | reverse
+ *		#returns 5
+ * @example: [0,1,2] | reverse
+ *		#returns 3
  */
 angular.module('twig.filters').filter('length', function () {
     return function (value) {
@@ -202,8 +209,10 @@ angular.module('twig.filters').filter('length', function () {
 /**
  * sort
  *
- * @example: ['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort #returns ['Alexandre','Benjamin','Julien','Marc','Pierre-louis','Zodiac']
- * @example: ['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort | reverse #returns ['Zodiac','Pierre-louis','Marc','Julien','Benjamin','Alexandre']
+ * @example: ['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort
+ *		#returns ['Alexandre','Benjamin','Julien','Marc','Pierre-louis','Zodiac']
+ * @example: ['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort | reverse
+ *		#returns ['Zodiac','Pierre-louis','Marc','Julien','Benjamin','Alexandre']
  */
 angular.module('twig.filters').filter('sort', function () {
     return function (value) {
@@ -217,8 +226,10 @@ angular.module('twig.filters').filter('sort', function () {
 /**
  * merge
  *
- * @example: [9,25,1] | merge:([1,2,3]) #returns [9,25,1,1,2,3]
- * @example: {id:1,version:'1.0.0'} | merge:({key:n,val:0}) | reverse #returns [id:1,version:'1.0.0',key:n,val:0}
+ * @example: [9,25,1] | merge:([1,2,3])
+ *		#returns [9,25,1,1,2,3]
+ * @example: {id:1,version:'1.0.0'} | merge:({key:n,val:0}) | reverse
+ *		#returns [id:1,version:'1.0.0',key:n,val:0}
  */
 angular.module('twig.filters').filter('merge', function () {
     return function (value, merge) {
@@ -236,8 +247,10 @@ angular.module('twig.filters').filter('merge', function () {
 /**
  * default
  *
- * @example: '' | default:('My default') #returns 'My default'
- * @example: null | default:('My default') | reverse #returns 'My default'
+ * @example: '' | default:('My default')
+ *		#returns 'My default'
+ * @example: null | default:('My default') | reverse
+ *		#returns 'My default'
  */
 angular.module('twig.filters').filter('default', function () {
     return function (value, def) {
@@ -252,8 +265,10 @@ angular.module('twig.filters').filter('default', function () {
 /**
  * keys
  *
- * @example: {key1:0,key2:1} | keys #returns ['key1','key2']
- * @example: ['version', 'number'] | keys #returns [0,1]
+ * @example: {key1:0,key2:1} | keys
+ *		#returns ['key1','key2']
+ * @example: ['version', 'number'] | keys 
+ *		returns [0,1]
  */
 angular.module('twig.filters').filter('keys', function () {
     return function (value) {
@@ -264,5 +279,130 @@ angular.module('twig.filters').filter('keys', function () {
             keys = [];
         for (var key in target) keys.push(key);
         return keys;
+    };
+});
+
+/**
+ * escape HTML, js, css, url, html_attr
+ *
+ * @example: '<p><strong>My</strong> exemple!</p>' | escape('html')
+ *		#returns "&#60;p&#62;&#60;strong&#62;My&#60;/strong&#62; exemple!&#60;/p&#62;"
+ * @example: '<script type="text/javascript">(function() { var a=window,b="jstiming",d="tick";</script>' | escape('js')
+ *		#returns "<script type=\"text/javascript\">(function() { var a=window,b=\"jstiming\",d=\"tick\";</script>"
+ * @example: 'http://www.frangular.com/2013/01/angularjs-service-raccourcis-clavier.html' | escape('url')
+ *		#returns "http%3A%2F%2Fwww.frangular.com%2F2013%2F01%2Fangularjs-service-raccourcis-clavier.html"
+ */
+angular.module('twig.filters').filter('escape', function () {
+    return function (value, type) {
+        if (!value || !angular.isString(value)) {
+            return value;
+        }
+		if (angular.isUndefined(type)) {
+			type = 'html';
+		}
+		switch(type) {
+			case 'html':
+				return value.replace(/[&<>"'`]/g, function (chr) {
+					return '&#' + chr.charCodeAt(0) + ';';
+				});
+				break;
+			case 'js':
+				return value.replace(/([\\"'])/g, "\\$1").replace(/\0/g, "\\0");
+				break;
+			case 'url':
+				return encodeURIComponent(value);
+				break;				
+		}
+    };
+});
+
+/**
+ * abs
+ *
+ * @example: -5 | abs
+ *		#returns 5
+ */
+angular.module('twig.filters').filter('abs', function () {
+    return function (value) {
+        if (!value || !angular.isNumber(value)) {
+            return value;
+        }
+		return Math.abs(value);
+    };
+});
+
+/**
+ * nl2br
+ *
+ * @example: 'FR\nangular\nJS' | nl2br
+ *		#returns 'FR<br />\nangular<br />\nJS'
+ */
+angular.module('twig.filters').filter('nl2br', function () {
+    return function (value) {
+        if (!value || !angular.isString(value)) {
+            return value;
+        }
+		return value.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br ' + '/>$2');
+    };
+});
+
+/**
+ * number_format
+ * 
+ * Strip all characters but numerical ones.
+ * 
+ * http://kevin.vanzonneveld.net
+ * @example 1: number_format(1234.56);
+ *     returns 1: '1,235'
+ * @example 2: number_format(1234.56, 2, ',', ' ');
+ *     returns 2: '1 234,56'
+ * @example 3: number_format(1234.5678, 2, '.', '');
+ *     returns 3: '1234.57'
+ * @example 4: number_format(67, 2, ',', '.');
+ *     returns 4: '67,00'
+ * @example 5: number_format(1000);
+ *     returns 5: '1,000'
+ * @example 6: number_format(67.311, 2);
+ *     returns 6: '67.31'
+ * @example 7: number_format(1000.55, 1);
+ *     returns 7: '1,000.6'
+ * @example 8: number_format(67000, 5, ',', '.');
+ *     returns 8: '67.000,00000'
+ * @example 9: number_format(0.9, 0);
+ *     returns 9: '1'
+ * @example 10: number_format('1.20', 2);
+ *    returns 10: '1.20'
+ * @example 11: number_format('1.20', 4);
+ *    returns 11: '1.2000'
+ * @example 12: number_format('1.2000', 3);
+ *    returns 12: '1.200'
+ * @example 13: number_format('1 000,50', 2, '.', ' ');
+ *    returns 13: '100 050.00'
+ */
+angular.module('twig.filters').filter('number_format', function () {
+    return function (value, decimals, dec_point, thousands_sep) {
+        if (!value) {
+            return value;
+        }
+		value = (value + '').replace(/[^0-9+\-Ee.]/g, '');
+		var n = !isFinite(+value) ? 0 : +value,
+		  prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+		  sep = angular.isUndefined(thousands_sep) ? ',' : thousands_sep,
+		  dec = angular.isUndefined(dec_point) ? '.' : dec_point,
+		  s = '',
+		  toFixedFix = function (n, prec) {
+			var k = Math.pow(10, prec);
+			return '' + Math.round(n * k) / k;
+		  };
+		// Fix for IE parseFloat(0.55).toFixed(0) = 0;
+		s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+		if (s[0].length > 3) {
+		  s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+		}
+		if ((s[1] || '').length < prec) {
+		  s[1] = s[1] || '';
+		  s[1] += new Array(prec - s[1].length + 1).join('0');
+		}
+		return s.join(dec);
     };
 });
