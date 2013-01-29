@@ -93,4 +93,10 @@ function MainCtrl($scope, $filter) {
 	$scope.strNumberFormat	= '1 000,50';
     console.debug('Filter number_format', $scope.strNumberFormat, '___', $filter('number_format')($scope.strNumberFormat, 2, '.', ' '));
 	
+	// slice
+	$scope.strSliceArr		= [1,2,3,4];
+	$scope.strSliceString	= '1234';
+    console.debug('Filter slice', $scope.strSliceArr, '___', $filter('slice')($scope.strSliceArr, 1, 2));
+    console.debug('Filter slice', $scope.strSliceString, '___', $filter('slice')($scope.strSliceString, 1, 2));
+	
 }

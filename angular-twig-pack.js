@@ -406,3 +406,27 @@ angular.module('twig.filters').filter('number_format', function () {
 		return s.join(dec);
     };
 });
+
+
+
+/**
+ * slice
+ * 
+ * The slice filter extracts a slice of a sequence, a mapping, or a string
+ * 
+ * @example 1: slice([1, 2, 3, 4], 1, 2);
+ *     returns 1: [2, 3]
+ * @example 2: slice('1234', 1, 2);
+ *     returns 2: '23'
+ */
+angular.module('twig.filters').filter('slice', function () {
+    return function (value, start, length) {
+		if ((!angular.isString(value) && !angular.isArray(value)) || !angular.isNumber(start)) {
+            return value;
+		}
+		if (!angular.isNumber(length)) {
+			length = 0;
+		}
+		return value.slice(start, start+length);
+    };
+});
