@@ -99,4 +99,9 @@ function MainCtrl($scope, $filter) {
     console.debug('Filter slice', $scope.strSliceArr, '___', $filter('slice')($scope.strSliceArr, 1, 2));
     console.debug('Filter slice', $scope.strSliceString, '___', $filter('slice')($scope.strSliceString, 1, 2));
 	
+	// slice
+	$scope.strTrimString	= '  I like AngularJS.  ';
+    console.debug('Filter slice', $scope.strTrimString, '___', $filter('trim')($scope.strTrimString));
+    console.debug('Filter slice char_mask', $scope.strTrimString, '___', $filter('trim')($scope.strTrimString, '.'));
+	
 }

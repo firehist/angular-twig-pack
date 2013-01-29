@@ -407,8 +407,6 @@ angular.module('twig.filters').filter('number_format', function () {
     };
 });
 
-
-
 /**
  * slice
  * 
@@ -428,5 +426,38 @@ angular.module('twig.filters').filter('slice', function () {
 			length = 0;
 		}
 		return value.slice(start, start+length);
+    };
+});
+
+/**
+ * trim
+ * 
+ * The trim filter strips whitespace (or other characters) from the beginning and end of a string
+ * 
+ * @see https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/String/Trim
+ * 
+ * @param {string} char_mask The characters to strip
+ * 
+ * @example 1: trim('  I like AngularJS.  ');
+ *     returns 1: 'I like AngularJS.'
+ * @example 2: slice('  I like AngularJS.  ', '.');
+ *     returns 2: 'I like AngularJS'
+ */
+angular.module('twig.filters').filter('trim', function () {
+    return function (value, char_mask) {
+		if (!value) {
+            return value;
+		}
+		// Backward compatibility
+		if(!String.prototype.trim) {
+			String.prototype.trim = function () {
+				return this.replace(/^\s+|\s+$/g,'');
+			};
+		}
+		var returnValue = value.trim();
+		if (angular.isDefined(char_mask) && angular.isString(char_mask)) {
+			return returnValue.replace(char_mask, '');
+		}
+		return returnValue;
     };
 });
