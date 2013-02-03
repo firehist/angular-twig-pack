@@ -104,4 +104,45 @@ function MainCtrl($scope, $filter) {
     console.debug('Filter slice', $scope.strTrimString, '___', $filter('trim')($scope.strTrimString));
     console.debug('Filter slice char_mask', $scope.strTrimString, '___', $filter('trim')($scope.strTrimString, '.'));
 	
+	
+	$scope.test = [
+		{'status':true, 'label':'pouet'},
+		{'status':false, 'label':'part'},
+		{'status':true, 'label':'aouch'}
+	];
+	$scope.change = function() {
+		$scope.test = [
+			{'status':true, 'label':'pouet'},
+			{'status':false, 'label':'part'},
+			{'status':false, 'label':'part1'},
+			{'status':false, 'label':'part2'},
+			{'status':true, 'label':'aouch'},
+			{'status':true, 'label':'aouch1'},
+			{'status':true, 'label':'aouch2'},
+			{'status':true, 'label':'aouch3'}
+		];
+	};
+}
+
+
+function MainTagsCtrl($scope, $filter) {
+    $scope.name = 'angular-twig-pack';
+
+	$scope.test = [
+		{'status':true, 'label':'pouet'},
+		{'status':false, 'label':'part'},
+		{'status':true, 'label':'aouch'}
+	];
+	$scope.change = function() {
+		$scope.test = [
+			{'status':true, 'label':'pouet'},
+			{'status':false, 'label':'part'},
+			{'status':false, 'label':'part1'},
+			{'status':false, 'label':'part2'},
+			{'status':true, 'label':'aouch'},
+			{'status':true, 'label':'aouch1'},
+			{'status':true, 'label':'aouch2'},
+			{'status':true, 'label':'aouch3'}
+		];
+	};
 }

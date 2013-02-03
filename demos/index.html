@@ -6,12 +6,19 @@
 		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link href="./demo.css" rel="stylesheet">
 
-		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.js"></script>
+		<script src="../js/libs/jquery-1.8.3/jquery.min.js"></script>
+		<script src="../js/libs/angularjs-1.0.2/angular.js"></script>
 
-		<script src="../angular-twig-pack.js"></script>
+		<!-- Uncomment for use not compiled file -->
+		<!--<script src="../angular-twig-pack.js"></script>-->
+		<!--<script src="../angular-twig-pack.min.js"></script>-->
+		<script src="../src/angular-twig-init.js"></script>
+		<script src="../src/angular-twig-tags.js"></script>
+		<script src="../src/angular-twig-functions.js"></script>
+		<script src="../src/angular-twig-filters.js"></script>
 		<script src="./demo.js"></script>
 	</head>
+	
 	<body ng-app="frAngular">
 
 		<div class="container" ng-controller="MainCtrl">
@@ -40,8 +47,7 @@
 					</ul>
 				</div>
 				<div class="span9">
-
-
+					
 					<div class="row-fluid">
 						<h2>{{name}}</h2>
 						<small>Check your <cite title="F12">console</cite></small>
@@ -50,7 +56,7 @@
 					<div class="row-fluid">
 						<h3>Filters</h3>
 					</div>
-
+					
 					<div class="row-fluid" id="url_encode">
 						<h4>url_encode</h4>
 						<div class="bs-docs-example">

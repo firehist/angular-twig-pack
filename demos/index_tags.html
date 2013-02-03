@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Demo angular-twig-pack</title>
+
+		<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		<link href="./demo.css" rel="stylesheet">
+
+		<script src="../js/libs/jquery-1.8.3/jquery.min.js"></script>
+		<script src="../js/libs/angularjs-1.0.2/angular.js"></script>
+
+		<!-- Uncomment for use not compiled file -->
+		<!--<script src="../angular-twig-pack.js"></script>-->
+		<script src="../angular-twig-pack.min.js"></script>
+<!--		<script src="../src/angular-twig-init.js"></script>
+		<script src="../src/angular-twig-tags.js"></script>
+		<script src="../src/angular-twig-functions.js"></script>
+		<script src="../src/angular-twig-filters.js"></script>-->
+		<script src="./demo.js"></script>
+	</head>
+	
+	<body ng-app="frAngular">
+
+		<div class="container" ng-controller="MainTagsCtrl">
+
+			<div class="row">
+				<div class="span3 bs-docs-sidebar">
+					<ul class="nav nav-list bs-docs-sidenav affix-top">
+						<li><a href="#url_encode"><i class="icon-chevron-right"></i> url_encode</a></li>
+						<li><a href="#json_decode"><i class="icon-chevron-right"></i> json_decode</a></li>
+					</ul>
+				</div>
+				<div class="span9">
+					
+					<div class="row-fluid">
+						<h2>{{name}}</h2>
+						<small>Check your <cite title="F12">console</cite></small>
+					</div>
+
+					<div class="row-fluid">
+						<h3>Directives</h3>
+					</div>
+					
+					<a href="#" ng-click="change()">Change!</a>
+
+					<div class="row-fluid" id="">
+						<h4>for: val in testg if val.status</h4>
+						<ul>
+							<li for="val in testg if val.status" for-else="No data"> {{val.label}} - {{val.status}}</li>
+						</ul>
+					</div>
+					<div class="row-fluid" id="">
+						<h4>for: val in test if val.status</h4>
+						<ul>
+							<li for="val in test if val.status" for-else="No data">{{$index}} --> Last:{{$last}} | {{val.label}} - {{val.status}}</li>
+						</ul>
+					</div>
+					<div class="row-fluid" id="">
+						<h4>for: val in test</h4>
+						<ul>
+							<li for="val in test" for-else="No data">{{val.label}} - {{val.status}}</li>
+						</ul>
+					</div>
+					<div class="row-fluid" id="">
+						<h4>for: val in tests</h4>
+						<ul>
+							<li for="val in tests" for-else="No data">{{val.label}} - {{val.status}}</li>
+						</ul>
+					</div>
+					<div class="row-fluid" id="">
+						<h4>for: val in 0..9 if val > 5</h4>
+						<ul>
+							<li for="val in 0..9 if val > 5" for-else="No data">{{val}}</li>
+						</ul>
+					</div>
+					<div class="row-fluid" id="">
+						<h4>for: val in 'm'|upper..'r'|upper if val > 'O'</h4>
+						<ul>
+							<li for="val in 'm'|upper..'r'|upper if val > 'O'" for-else="No data">{{val}}</li>
+						</ul>
+					</div>
+					
+					
+					
+					<div class="row-fluid" id="">
+						<h4>for: val in testg if val.status</h4>
+						<input type="number" ng-model="ifTest" value="6"/>
+						<ul>
+							<li if="ifTest > 6">
+								ifTest > 6
+								<elseif on="ifTest > 20">ifTest > 20</elseif>
+								<elseif on="ifTest > 40">ifTest > 40</elseif>
+								<elseif on="ifTest > 60">ifTest > 60</elseif>
+								<elseif on="ifTest > 70">ifTest > 70</elseif>
+								<else>Else!!!</else>
+							</li>
+						</ul>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
