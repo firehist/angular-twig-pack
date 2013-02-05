@@ -1,13 +1,19 @@
 .bs-docs-example {
 	position: relative;
 	margin: 15px 0;
-	padding: 39px 19px 14px;
+	padding: 19px 19px 14px;
 	background-color: white;
 	border: 1px solid #DDD;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	background-color: #EEEEEE;
+}
+.bs-docs-example label {
+	width: 100px;
+	margin-right: 10px;
+	display: inline-block;
+	font-style: italic;
 }
 .bs-docs-example + .prettyprint {
 	margin-top: -20px;

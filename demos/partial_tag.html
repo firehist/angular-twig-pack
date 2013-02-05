@@ -1,0 +1,131 @@
+<div class="span3 bs-docs-sidebar">
+	<ul class="nav nav-list bs-docs-sidenav affix-top">
+		<li><a href="#tags#for"><i class="icon-chevron-right"></i> for</a></li>
+		<li><a href="#tags#if-elseif-else"><i class="icon-chevron-right"></i> if</a></li>
+		<li><a href="#tags#macro"><i class="icon-chevron-right"></i> macro</a></li>
+	</ul>
+</div>
+<div class="span9">
+
+	<div class="row-fluid">
+		<h3>Tags</h3>
+	</div>
+
+	<div class="row-fluid" id="for">
+		<h4>for</h4>
+		<div class="bs-docs-example">
+			<p><strong>Data:</strong> <button ng-click="changeFor()">Dynamic change</button> <button ng-click="resetFor()">Reset</button></p>
+			<p><label>forAttr:</label> {{forAttr|json}}</p>
+			<p><label>forAttrUndefined:</label> undefined</p>
+		</div>
+		
+		<h5>Exemple 1: "<cite>for: val in forAttrUndefined if val.status</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in forAttrUndefined if val.status" for-else="No data"> {{val.label}} - {{val.status}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in forAttrUndefined if val.status" for-else="No data"&gt;{{val.label}} - {{val.status}}&lt;/li&gt;</pre>
+		
+		<h5>Exemple 2: "<cite>for: val in forAttr if val.status</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in forAttr if val.status" for-else="No data"> {{val.label}} - {{val.status}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in forAttr if val.status" for-else="No data"&gt;{{val.label}} - {{val.status}}&lt;/li&gt;</pre>
+		
+		<h5>Exemple 3: "<cite>for: val in forAttr</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in forAttr" for-else="No data"> {{val.label}} - {{val.status}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in forAttr" for-else="No data"&gt;{{val.label}} - {{val.status}}&lt;/li&gt;</pre>
+		
+		<h5>Exemple 4: "<cite>for: val in forAttrUndefined</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in forAttrUndefined" for-else="No data"> {{val.label}} - {{val.status}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in forAttrUndefined" for-else="No data"&gt;{{val.label}} - {{val.status}}&lt;/li&gt;</pre>
+		
+		<h5>Exemple 5: "<cite>for: val in 0..9 if val > 5</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in 0..9 if val > 5" for-else="No data"> {{val}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in 0..9 if val > 5" for-else="No data"&gt;{{val}}&lt;/li&gt;</pre>
+		
+		<h5>Exemple 6: "<cite>for: val in 'm'|upper..'r'|upper if val > 'O'</cite>"</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul><li for="val in 'm'|upper..'r'|upper if val > 'O'" for-else="No data">{{val}}</li></ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li for="val in 'm'|upper..'r'|upper if val > 'O'" for-else="No data"&gt;{{val}}&lt;/li&gt;</pre>
+	</div>
+	
+	<div class="row-fluid" id="if-elseif-else">
+		<h4>if</h4>
+		<div class="bs-docs-example">
+			<p><strong>Data:</strong> <input type="number" ng-model="ifTest"/></p>
+			<p><label>ifTest:</label> {{ifTest}}</p>
+		</div>
+		
+		<h5>Exemple</h5>
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<ul>
+				<li if="ifTest > 70">
+					ifTest > 70
+					<elseif on="ifTest > 60">ifTest > 60</elseif>
+					<elseif on="ifTest > 40">ifTest > 40</elseif>
+					<elseif on="ifTest > 20">ifTest > 20</elseif>
+					<elseif on="ifTest > 10">ifTest > 10</elseif>
+					<else>Else!!!</else>
+				</li>
+			</ul>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;li if="ifTest > 70"&gt;
+	ifTest > 70
+	&lt;elseif on="ifTest > 60"&gt;ifTest > 60&lt;/elseif&gt;
+	&lt;elseif on="ifTest > 40"&gt;ifTest > 40&lt;/elseif&gt;
+	&lt;elseif on="ifTest > 20"&gt;ifTest > 20&lt;/elseif&gt;
+	&lt;elseif on="ifTest > 10"&gt;ifTest > 10&lt;/elseif&gt;
+	&lt;else&gt;Else!!!&lt;/else&gt;
+&lt;/li&gt;</pre>
+	</div>
+	
+	<div class="row-fluid" id="macro">
+		<h4>macro</h4>
+		<div class="bs-docs-example">
+			<p><strong>Data:</strong></p>
+			<p><label>macroTest:</label> {{macroTest}}</p>
+			<p><label>macroCtrlTest:</label> {{macroCtrlTest}}</p>
+		</div>
+		
+		<h5>Exemple</h5>
+		
+		
+		<macro-set name="miscMacro" param="disp1,disp2">
+			<ul>
+				<li>=> {{disp1}}</li>
+				<li>=> {{disp2}}</li>
+				<li for="var in 0..5 if var > 2">{{var}} myTest {{macroTest}}</li>
+			</ul>
+		</macro-set>
+		
+		<div class="bs-docs-example">
+			<p><strong>Result:</strong></p>
+			<macro-get name="miscMacro" param="macroCtrlTest,'valueDisp2'" />
+		</div>
+		
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>&lt;macro-set name="miscMacro" param="disp1,disp2"&gt;
+	&lt;ul&gt;
+		&lt;li&gt;=> {{disp1}}&lt;/li&gt;
+		&lt;li&gt;=> {{disp2}}&lt;/li&gt;
+		&lt;li for="var in 0..5 if var > 2"&gt;{{var}} myTest {{macroTest}}&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/macro-set&gt;
+&lt;macro-get name="miscMacro" param="macroCtrlTest,'valueDisp2'" /&gt;</pre>
+		
+	</div>
+
+</div>

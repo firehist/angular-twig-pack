@@ -1,0 +1,307 @@
+<div class="span3 bs-docs-sidebar">
+	<ul class="nav nav-list bs-docs-sidenav affix-top">
+		<li><a href="#filters#url_encode"><i class="icon-chevron-right"></i> url_encode</a></li>
+		<li><a href="#filters#json_decode"><i class="icon-chevron-right"></i> json_decode</a></li>
+		<li><a href="#filters#title"><i class="icon-chevron-right"></i> title</a></li>
+		<li><a href="#filters#capitalize"><i class="icon-chevron-right"></i> capitalize</a></li>
+		<li><a href="#filters#upper"><i class="icon-chevron-right"></i> upper</a></li>
+		<li><a href="#filters#striptags"><i class="icon-chevron-right"></i> striptags</a></li>
+		<li><a href="#filters#join"><i class="icon-chevron-right"></i> join</a></li>
+		<li><a href="#filters#reverse"><i class="icon-chevron-right"></i> reverse</a></li>
+		<li><a href="#filters#length"><i class="icon-chevron-right"></i> length</a></li>
+		<li><a href="#filters#sort"><i class="icon-chevron-right"></i> sort</a></li>
+		<li><a href="#filters#default"><i class="icon-chevron-right"></i> default</a></li>
+		<li><a href="#filters#keys"><i class="icon-chevron-right"></i> keys</a></li>
+		<li><a href="#filters#escape"><i class="icon-chevron-right"></i> escape</a></li>
+		<li><a href="#filters#abs"><i class="icon-chevron-right"></i> abs</a></li>
+		<li><a href="#filters#nl2br"><i class="icon-chevron-right"></i> nl2br</a></li>
+		<li><a href="#filters#number_format"><i class="icon-chevron-right"></i> number_format</a></li>
+		<li><a href="#filters#slice"><i class="icon-chevron-right"></i> slice</a></li>
+		<li><a href="#filters#trim"><i class="icon-chevron-right"></i> trim</a></li>
+	</ul>
+</div>
+<div class="span9">
+
+	<div class="row-fluid">
+		<h3>Filters <small>Check your <cite title="F12">console</cite></small></h3>
+	</div>
+
+	<div class="row-fluid" id="url_encode">
+		<h4>url_encode</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strUrlEncode | url_encode}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'http://w3schools.com/my test.asp?name=ståle&car=saab' | url_encode}}
+<strong>Controller: </strong>$filter('url_encode')('http://w3schools.com/my test.asp?name=ståle&car=saab')</pre>
+	</div>
+
+	<div class="row-fluid" id="json_decode">
+		<h4>json_decode</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strUrlEncode | url_encode}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'{"key":["Thierry","Jacques"],"v":0}' | json_encode}}
+<strong>Controller: </strong>$filter('json_encode')('{"key":["Thierry","Jacques"],"v":0}')</pre>
+	</div>
+
+	<div class="row-fluid" id="title">
+		<h4>title</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strTitle | title}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'my title to titled' | title}}
+<strong>Controller: </strong>$filter('title')('my title to titled')</pre>
+	</div>
+
+	<div class="row-fluid" id="capitalize">
+		<h4>capitalize</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strCapitalize | capitalize}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'my title to titled' | capitalize}}
+<strong>Controller: </strong>$filter('capitalize')('my title to titled')</pre>
+	</div>
+
+	<div class="row-fluid" id="upper">
+		<h4>upper</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strUpper | upper}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'my title to titled' | upper}}
+<strong>Controller: </strong>$filter('upper')('my title to titled')</pre>
+	</div>
+
+	<div class="row-fluid" id="lower">
+		<h4>lower</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strLower | lower}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'my title to titled' | lower}}
+<strong>Controller: </strong>$filter('lower')('my title to titled')</pre>
+	</div>
+
+	<div class="row-fluid" is="striptags">
+		<h4>striptags</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			<pre>{{strStriptags | striptags:("&lt;i&gt;&lt;b&gt;")}}</pre>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{strStriptags | striptags:("&lt;i&gt;&lt;b&gt;")}}
+<strong>Controller: </strong>$filter('striptags')(strStriptags, ""&lt;i&gt;&lt;b&gt;"")</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			<pre>{{strStriptags | striptags}}</pre>
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{strStriptags | striptags}}
+<strong>Controller: </strong>$filter('striptags')(strStriptags)</pre>
+	</div>
+
+	<div class="row-fluid" id="join">
+		<h4>join</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrJoin | join}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[0,1,2] | join}}
+<strong>Controller: </strong>$filter('join')([0,1,2])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrJoin | join:('|')}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[0,1,2] | join:('|')}}
+<strong>Controller: </strong>$filter('join')([0,1,2], '|')</pre>
+	</div>
+
+	<div class="row-fluid" id="reverse">
+		<h4>reverse</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrReverse | reverse}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[0,1,2,3,4] | reverse}}
+<strong>Controller: </strong>$filter('reverse')([0,1,2,3,4])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strReverse | reverse}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'01234' | reverse}}
+<strong>Controller: </strong>$filter('reverse')('01234')</pre>
+	</div>
+
+	<div class="row-fluid" id="length">
+		<h4>length</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrLength | length}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[0,1,2,3,4] | length}}
+<strong>Controller: </strong>$filter('length')([0,1,2,3,4])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strLength | length}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'0124' | length}}
+<strong>Controller: </strong>$filter('length')('0124')</pre>
+	</div>
+
+	<div class="row-fluid" id="sort">
+		<h4>sort</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrSort | sort}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort}}
+<strong>Controller: </strong>$filter('sort')(['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrSort | sort | reverse}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort | reverse}}
+<strong>Controller: </strong>$filter('reverse')( $filter('sort')(['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc']) )</pre>
+	</div>
+
+	<div class="row-fluid" id="merge">
+		<h4>merge</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrMerge | merge:([1,2,3])}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[9,25,1] | merge:([1,2,3])}}
+<strong>Controller: </strong>$filter('merge')([9,25,1], [1,2,3])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{objMerge | merge:({key:'n',val:0})}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc'] | sort | reverse}}
+<strong>Controller: </strong>$filter('reverse')( $filter('sort')(['Zodiac','Benjamin','Alexandre','Julien','Pierre-louis','Marc']) )</pre>
+	</div>
+
+	<div class="row-fluid" id="default">
+		<h4>default</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strDefault | default:(strMyDefault)}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'' | default:('My default')}}
+<strong>Controller: </strong>$filter('default')('', 'My default')</pre>
+	</div>
+
+	<div class="row-fluid" id="keys">
+		<h4>keys</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{arrKeys | keys}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[9,25,1] | keys}}
+<strong>Controller: </strong>$filter('keys')([9,25,1])</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{objKeys | keys}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{{'key1':0,'key2':1} | keys}}
+<strong>Controller: </strong>$filter('keys')({'key1':0,'key2':1})</pre>
+	</div>
+
+	<div class="row-fluid" id="escape">
+		<h4>escape</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strHTML | escape}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'' | escape}}
+<strong>Controller: </strong>$filter('escape')('')</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strJS | escape:('js')}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'&#60;script type=&#34;text/javascript&#34;&#62;(function() { var a=window,b=&#34;jstiming&#34;,d=&#34;tick&#34;;&#60;/script&#62;' | escape:('js')}}
+<strong>Controller: </strong>$filter('escape')('&#60;script type=&#34;text/javascript&#34;&#62;(function() { var a=window,b=&#34;jstiming&#34;,d=&#34;tick&#34;;&#60;/script&#62;', 'js')</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strURL | escape:('url')}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'http://www.frangular.com/2013/01/angularjs-service-raccourcis-clavier.html' | escape:('url')}}
+<strong>Controller: </strong>$filter('escape')('http://www.frangular.com/2013/01/angularjs-service-raccourcis-clavier.html', 'url)</pre>
+	</div>
+
+	<div class="row-fluid" id="abs">
+		<h4>abs</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strABS | abs}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{-5 | abs}}
+<strong>Controller: </strong>$filter(-5)('abs')</pre>
+	</div>
+
+	<div class="row-fluid" id="nl2br">
+		<h4>nl2br</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strNL2BR | nl2br}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'FR\nangular\nJS' | nl2br}}
+<strong>Controller: </strong>$filter('FR\nangular\nJS')('nl2br')</pre>
+	</div>
+
+	<div class="row-fluid" id="number_format">
+		<h4>number_format</h4>
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strNumberFormat | number_format:(2):('.'):(' ')}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'1 000,50' | number_format:(2):('.'):(' ')}}
+<strong>Controller: </strong>$filter('1 000,50')('number_format', 2, '.', ' ')</pre>
+	</div>
+
+	<div class="row-fluid" id="slice">
+		<h4>slice</h4>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strSliceArr | slice:(1):(2)}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{[1,2,3,4] | slice(1):(2)}}
+<strong>Controller: </strong>$filter('slice')([1,2,3,4], 1, 2)</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strSliceString | slice:(1):(20)}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'1234' | slice:(1):(2)}}
+<strong>Controller: </strong>$filter('slice')('1234', 1, 2)</pre>
+	</div>
+
+	<div class="row-fluid" id="trim">
+		<h4>trim</h4>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strTrimString | trim}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'  I like AngularJS.  ' | trim}}
+<strong>Controller: </strong>$filter('trim')('  I like AngularJS.  ')</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{strTrimString | trim:('.')}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'  I like AngularJS.  ' | trim:('.')}}
+<strong>Controller: </strong>$filter('trim')('  I like AngularJS.  ', '.')</pre>
+	</div>
+</div>

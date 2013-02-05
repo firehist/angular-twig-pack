@@ -1,5 +1,7 @@
+"use strict";
 // Declare modules
 angular.module('twig.config', []).value('twig.config', {
+	'macroCache': null,
 	'lowercase': function(string){
 		return isString(string) ? string.toLowerCase() : string;
 	},

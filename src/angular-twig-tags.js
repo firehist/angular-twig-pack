@@ -31,7 +31,8 @@ angular.module('twig.directives').directive('for', [
 					regex = /(.*)\s*in\s*(.*)/,
 					expression = '',
 					elseTemplate = angular.isDefined(attr['forElse']) ? attr['forElse'] : 'No data',
-					elementToInsert = element.clone().removeAttr('for').removeAttr('for-else');
+					elementToInsert = element.clone().removeAttr('for').removeAttr('for-else'),
+					length = 0;
 
 				expression = regex.exec(attr['for']);
 				if (expression === null)
@@ -85,6 +86,11 @@ angular.module('twig.directives').directive('for', [
 					$scope.$watch(expr, function(items) {
 						watchItems(angular.copy(items));
 					});
+					$scope.$watch(expr + '.length', function(a) {
+						if (a != length) {
+							watchItems(angular.copy($scope.$eval(expr)));
+						}
+					});
 				}
 
 			}
@@ -98,7 +104,6 @@ angular.module('twig.directives').directive('for', [
  * The if statement in Twig is comparable with the if statements of PHP.
  * 
  * @see http://twig.sensiolabs.org/doc/tags/if.html
- * @see http://docs.angularjs.org/api/ng.directive:ngSwitch
  * 
  * @example : <li if="myVar >= 6">
  *				...
@@ -129,16 +134,113 @@ angular.module('twig.directives').directive('if', [
 					conditions.push(createObj(cdt, $this.html()));
 				});
 				conditions.push(createObj('_else_', findElse.html()));
-				// Bind watch to follow data changes
-				$scope.$watch(expression, function(items) {
+				
+				var watchData = function() {
 					var newHtml = false;
 					angular.forEach(conditions, function(item, key) {
-						if ( newHtml === false && item['cdt'] === '_else_' || twigConfig['toBoolean']($scope.$eval(item['cdt']))) {
+						if ( newHtml === false && (item['cdt'] === '_else_' || twigConfig['toBoolean']($scope.$eval(item['cdt'])))) {
 							newHtml = item['html'];
 						}
 					});
 					if (newHtml !== false) {element.html(newHtml); }
+				};
+				
+				// Bind watches to follow all conditions data changes
+				angular.forEach(conditions, function(condition,k) {
+					$scope.$watch(condition['cdt'], watchData);
 				});
+			}
+		};
+	}]);
+
+/**
+ * macro 
+ * 
+ * Macros are useful to put often used HTML idioms into reusable elements
+ * to not repeat yourself.
+ * 
+ * @see http://twig.sensiolabs.org/doc/tags/macro.html
+ * 
+ * @example : <li if="myVar >= 6">
+ *				...
+ *				<elseif on="myOtherVar >= 6">...</elseif>
+ *				<else>Default</else>
+ *			  </li>
+ */
+angular.module('twig.directives').directive('macroGet', [
+	'twig.config', '$compile',
+	function (twigConfig, $compile) {
+		return {
+			scope:		true,
+			restrict:	'E',
+			link:		function($scope, element, attr){
+				var name = angular.isDefined(attr['name']) ? attr['name'] : null,
+					params = angular.isDefined(attr['param']) ? attr['param'].split(',') : null;
+			
+				if (!angular.isString(name) || !angular.isArray(params) || params.length === 0) {
+					throw new Error('The given expression is not valid "' + name + '" - "' + params + '". SYNTAX: macro name="nameMacro" param="\'param1\',\'param2\',paramFromScope".');
+				}
+				
+				angular.forEach(params, function(param,key) {
+					if (param.indexOf("'") > -1) {
+						params[key] = param.replace("'", "");
+					} else if (angular.isDefined($scope[param])) {
+						params[key] = $scope.$eval(param);
+					}
+				});
+				
+				// Some vars
+				var macroObj		= twigConfig['macroCache'].get(name),
+					isolateScope	= $scope.$new();
+				// Check if exist
+				if (angular.isUndefined(macroObj)) {
+					element.html('');
+					return false;
+				}
+
+				angular.forEach(macroObj['param'], function(paramName, key) {
+					if (angular.isDefined(params[key]))
+						isolateScope[paramName] = params[key];
+				});
+
+				element.replaceWith($compile(macroObj['html'])(isolateScope));
+			}
+		};
+	}]);
+
+angular.module('twig.directives').directive('macroSet', [
+	'twig.config', '$cacheFactory',
+	function (twigConfig, $cacheFactory) {
+		return {
+			scope:		true,
+			restrict:	'E',
+			terminal:	true,
+			compile:	function(iElement, sAttr){
+				return {
+					pre: function($scope, $element, attr) {
+						var name = angular.isDefined(attr['name']) ? attr['name'] : null,
+							params = angular.isDefined(attr['param']) ? attr['param'].split(',') : null;
+						if (!angular.isString(name) || !angular.isArray(params) || params.length === 0) {
+							throw new Error('The given expression is not valid "' + name + '" - "' + params + '". SYNTAX: macro-set name="MacroName" param="paramName1,paramName2". ');
+						}
+						if (angular.isUndefined(twigConfig['macroCache']) || twigConfig['macroCache'] === null) {
+							twigConfig['macroCache'] = $cacheFactory('twigMacros');
+						}
+						// Some vars
+						var elementCopy = $element.clone().removeAttr('macro-set');
+						
+						// Check if already exist
+						if (angular.isDefined(twigConfig['macroCache'].get(name)))
+							console.error('The given macro name already exist! "' + name + '"');
+						// Save data into store
+						twigConfig['macroCache'].put(name, {
+							'param':	params,
+							'html':		elementCopy.html()
+						});
+						
+						$element.css('display','none');
+					}
+				}
 			}
 		};
 	}]);
