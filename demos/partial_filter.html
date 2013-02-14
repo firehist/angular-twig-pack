@@ -18,6 +18,9 @@
 		<li><a href="#filters#number_format"><i class="icon-chevron-right"></i> number_format</a></li>
 		<li><a href="#filters#slice"><i class="icon-chevron-right"></i> slice</a></li>
 		<li><a href="#filters#trim"><i class="icon-chevron-right"></i> trim</a></li>
+		<li><a href="#filters#divisibleby"><i class="icon-chevron-right"></i> divisibleby</a></li>
+		<li><a href="#filters#even"><i class="icon-chevron-right"></i> even</a></li>
+		<li><a href="#filters#odd"><i class="icon-chevron-right"></i> odd</a></li>
 	</ul>
 </div>
 <div class="span9">
@@ -303,5 +306,59 @@
 		</div>
 		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{'  I like AngularJS.  ' | trim:('.')}}
 <strong>Controller: </strong>$filter('trim')('  I like AngularJS.  ', '.')</pre>
+	</div>
+
+	<div class="row-fluid" id="divisibleby">
+		<h4>divisibleby</h4>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{6 | divisibleby:(3)}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{6 | divisible:(3)}}
+<strong>Controller: </strong>$filter('divisibleby')(6, 3)</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{5 | divisibleby:(3)}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{5 | divisible:(3)}}
+<strong>Controller: </strong>$filter('divisibleby')(5, 3)</pre>
+	</div>
+
+	<div class="row-fluid" id="odd">
+		<h4>odd</h4>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{6 | odd}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{6 | odd}}
+<strong>Controller: </strong>$filter('odd')(6)</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{5 | odd}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{5 | odd}}
+<strong>Controller: </strong>$filter('odd')(5)</pre>
+	</div>
+
+	<div class="row-fluid" id="even">
+		<h4>even</h4>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{6 | even}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{6 | even}}
+<strong>Controller: </strong>$filter('even')(6)</pre>
+
+		<div class="bs-docs-example">
+			<strong>Result:</strong>
+			{{5 | even}}
+		</div>
+		<pre class="prettyprint" ng-non-bindable><strong>View: </strong>{{5 | even}}
+<strong>Controller: </strong>$filter('even')(5)</pre>
 	</div>
 </div>

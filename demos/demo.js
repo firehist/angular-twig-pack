@@ -1,14 +1,19 @@
 var app = angular.module('frAngular', ['twig']);
-app.config(['$routeProvider', '$locationProvider', function( $routeProvider, $locationProvider ){
-    $routeProvider.when('/filters', {
-        templateUrl: 'partial_filter.html',
-        controller: FilterCtrl
-    });
-    $routeProvider.when('/tags', {
-        templateUrl: 'partial_tag.html',
-        controller: TagCtrl
-    });
-    $routeProvider.otherwise({ redirectTo: '/filters' });
+app.config(['$routeProvider', '$locationProvider', function( $routeProvider, $locationProvider){
+    $routeProvider
+		.when('/filters', {
+			templateUrl: 'partial_filter.html',
+			controller: FilterCtrl
+		})
+		.when('/tags', {
+			templateUrl: 'partial_tag.html',
+			controller: TagCtrl
+		})
+		.when('/functions', {
+			templateUrl: 'partial_functions.html',
+			controller: FunctionsCtrl
+		})
+		.otherwise({ redirectTo: '/filters' });
 }]);
 
 app.service('pageService', function() {
@@ -21,8 +26,45 @@ app.service('pageService', function() {
 
 function MainCtrl($scope) {
     $scope.name = "angular-twig-pack";
-
     $scope.page = null;
+};
+
+function FunctionsCtrl($scope, pageService, twig) {
+    var namePage = 'Function';
+	
+    var init = function() {
+		/**
+		 * Random
+		 */
+		$scope.changeRandom = function() {
+			$scope.rndArray = twig.random(['alex','pilou','ju','bennnou']);
+			$scope.rndString = twig.random('tartoprune');
+			$scope.rndNumber = twig.random(100);
+			$scope.rndEmpty = twig.random();
+		};
+		$scope.changeRandom();
+		/**
+		 * divisibleby
+		 */
+		$scope.divbyYes = twig.divisibleby(6,3);
+		$scope.divbyNo = twig.divisibleby(5,3);
+		/**
+		 * even
+		 */
+		$scope.evenYes = twig.even(6);
+		$scope.evenNo = twig.even(5);
+		/**
+		 * divisibleby
+		 */
+		$scope.oddYes = twig.odd(5);
+		$scope.oddNo = twig.odd(6);
+		
+    };
+
+	init();
+    if (!pageService.isCurrentPage(namePage)) {
+        pageService.setPage(namePage);
+    }
 };
 
 function TagCtrl($scope, pageService) {

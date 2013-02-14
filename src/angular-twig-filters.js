@@ -14,9 +14,7 @@
  */
 angular.module('twig.filters').filter('format', function () {
     return function (value, replace) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         var target = value.toString(), token;
         if (replace === undefined) {
             return target;
@@ -40,9 +38,7 @@ angular.module('twig.filters').filter('format', function () {
  */
 angular.module('twig.filters').filter('url_encode', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         var target = value.toString();
         return encodeURIComponent(target);
     };
@@ -55,9 +51,7 @@ angular.module('twig.filters').filter('url_encode', function () {
  */
 angular.module('twig.filters').filter('json_encode', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         var target = value.toString();
         return angular.fromJson(target);
     };
@@ -70,13 +64,66 @@ angular.module('twig.filters').filter('json_encode', function () {
  */
 angular.module('twig.filters').filter('title', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         var target = value.toString();
         return target.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
     };
 });
+
+/**
+ * divisibleby
+ *
+ * @see: http://twig.sensiolabs.org/doc/tests/divisibleby.html
+ * 
+ * @param {number} value The number to test div
+ * @param {number} div The div
+ * 
+ * @example: 6 | divisibleby:3
+ */
+angular.module('twig.filters').filter('divisibleby', ['twig.config', function (twigConfig) {
+    return function (value, div) {
+        if (!value) return value;
+        return twigConfig.divisibleby(value, div);
+    };
+}]);
+
+/**
+ * odd
+ * 
+ * returns true if the given number is odd
+ *
+ * @see: http://twig.sensiolabs.org/doc/tests/odd.html
+ * 
+ * @param {number} value The number to test
+ * 
+ * @example: 6 | odd // false
+ * @example: 5 | odd // true
+ */
+angular.module('twig.filters').filter('odd', ['twig.config', function (twigConfig) {
+    return function (value) {
+        if (!value) return value;
+        return twigConfig['odd'](value);
+    };
+}]);
+
+/**
+ * even 
+ * 
+ * returns true if the given number is even
+ * 
+ * @see http://twig.sensiolabs.org/doc/tests/even.html
+ * 
+ * @param {number} value The number to test
+ * 
+ * @example: 6 | odd // true
+ * @example: 5 | odd // false
+ */
+angular.module('twig.filters').filter('even', ['twig.config', function (twigConfig) {
+    return function (value) {
+        if (!value) return value;
+        return twigConfig['even'](value);
+    };
+}]);
 
 /**
  * Capitalize
@@ -85,9 +132,7 @@ angular.module('twig.filters').filter('title', function () {
  */
 angular.module('twig.filters').filter('capitalize', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         var target = value.toString().toLowerCase();
         return target.charAt(0).toUpperCase() + target.slice(1);
     };
@@ -100,9 +145,7 @@ angular.module('twig.filters').filter('capitalize', function () {
  */
 angular.module('twig.filters').filter('upper', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         return target = value.toString().toUpperCase();
     };
 });
@@ -114,9 +157,7 @@ angular.module('twig.filters').filter('upper', function () {
  */
 angular.module('twig.filters').filter('lower', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         return target = value.toString().toLowerCase();
     };
 });
@@ -130,9 +171,7 @@ angular.module('twig.filters').filter('lower', function () {
  */
 angular.module('twig.filters').filter('striptags', function () {
     return function (value, allowed) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
         allowed = (((allowed || "") + "").toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
         var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
             commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
@@ -171,10 +210,7 @@ angular.module('twig.filters').filter('join', function () {
  */
 angular.module('twig.filters').filter('reverse', function () {
     return function (value) {
-        if (!value) {
-            return value;
-        }
-
+        if (!value) return value;
         if (angular.isString(value)) return value.split("").reverse().join("");
         else if (angular.isArray(value)) return angular.copy(value).reverse();
         return value;
@@ -251,7 +287,7 @@ angular.module('twig.filters').filter('default', function () {
         if (!def) {
             return value;
         }
-        if (!value || value == '' || value == null) return def;
+        if (!value || value === '' || value === null) return def;
         return value;
     };
 });
@@ -375,9 +411,7 @@ angular.module('twig.filters').filter('nl2br', function () {
  */
 angular.module('twig.filters').filter('number_format', function () {
     return function (value, decimals, dec_point, thousands_sep) {
-        if (!value) {
-            return value;
-        }
+        if (!value) return value;
 		value = (value + '').replace(/[^0-9+\-Ee.]/g, '');
 		var n = !isFinite(+value) ? 0 : +value,
 		  prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
@@ -439,9 +473,7 @@ angular.module('twig.filters').filter('slice', function () {
  */
 angular.module('twig.filters').filter('trim', function () {
     return function (value, char_mask) {
-		if (!value) {
-            return value;
-		}
+        if (!value) return value;
 		var returnValue = value.trim();
 		if (angular.isDefined(char_mask) && angular.isString(char_mask)) {
 			return returnValue.replace(char_mask, '');

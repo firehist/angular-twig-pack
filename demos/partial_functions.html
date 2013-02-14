@@ -1,0 +1,64 @@
+<div class="span3 bs-docs-sidebar">
+	<ul class="nav nav-list bs-docs-sidenav affix-top">
+		<li><a href="#functions#twigRandom"><i class="icon-chevron-right"></i> twigRandom</a></li>
+		<li><a href="#functions#twigDivisibleby"><i class="icon-chevron-right"></i> twigDivisibleby</a></li>
+		<li><a href="#functions#twigEven"><i class="icon-chevron-right"></i> twigEven</a></li>
+		<li><a href="#functions#twigOdd"><i class="icon-chevron-right"></i> twigOdd</a></li>
+	</ul>
+</div>
+<div class="span9">
+
+	<div class="row-fluid">
+		<h3>Functions</h3>
+	</div>
+	
+	<div class="row-fluid" id="twigRandom">
+		<h4>twigRandom</h4>
+		
+		<div class="bs-docs-example">
+			<p><button ng-click="changeRandom()">Dynamic change</button></p>
+			<p><strong>twig.random(['alex','pilou','ju','bennnou'])</strong></p>
+			<p>{{rndArray}}</p>
+			<p><strong>twig.random('tartoprune')</strong></p>
+			<p>{{rndString}}</p>
+			<p><strong>twig.random(100)</strong></p>
+			<p>{{rndNumber}}</p>
+			<p><strong>twig.random()</strong></p>
+			<p>{{rndEmpty}}</p>
+		</div>
+	</div>
+	
+	<div class="row-fluid" id="twigDivisibleby">
+		<h4>twigDivisibleby</h4>
+		
+		<div class="bs-docs-example">
+			<p><strong>twig.divisibleby(6, 3)</strong></p>
+			<p>{{divbyYes}}</p>
+			<p><strong>twig.divisibleby(5, 3)</strong></p>
+			<p>{{divbyNo}}</p>
+		</div>
+	</div>
+	
+	<div class="row-fluid" id="twigEven">
+		<h4>twigEven</h4>
+		
+		<div class="bs-docs-example">
+			<p><strong>twig.even(6)</strong></p>
+			<p>{{evenYes}}</p>
+			<p><strong>twig.even(5)</strong></p>
+			<p>{{evenNo}}</p>
+		</div>
+	</div>
+	
+	<div class="row-fluid" id="twigOdd">
+		<h4>twigOdd</h4>
+		
+		<div class="bs-docs-example">
+			<p><strong>twig.odd(5)</strong></p>
+			<p>{{oddYes}}</p>
+			<p><strong>twig.odd(6)</strong></p>
+			<p>{{oddNo}}</p>
+		</div>
+	</div>
+	
+</div>
