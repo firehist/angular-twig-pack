@@ -9,7 +9,7 @@ OUTPUTJS=angular-twig-pack.js
 OUTPUTJSMIN=angular-twig-pack.min.js
 cd "$DIR"
 
-JSFILES="--js ../src/angular-twig-init.js --js ../src/angular-twig-filters.js --js ../src/angular-twig-tags.js --js ../src/angular-twig-functions.js"
+JSFILES="--js ../src/angular-twig-init.js --js ../src/angular-twig-filters.js --js ../src/angular-twig-tags.js"
 
 COMPILER=compiler.jar
 
@@ -33,6 +33,10 @@ java -jar $COMPILER --compilation_level ADVANCED_OPTIMIZATIONS \
 	--externs externs/angular.js \
 	--externs externs/jquery-1.8.js
 
+cp $BASEDIR/$OUTPUTJSMIN $BASEDIR/$OUTPUTJSMIN.old
+gzip -9 $BASEDIR/$OUTPUTJSMIN -f
+mv $BASEDIR/$OUTPUTJSMIN.old $BASEDIR/$OUTPUTJSMIN
+	
 echo "--> Minified file: "
 echo "  Filename: $OUTPUTJS"
 echo "  Filesize: $(stat --printf="%s" ../$OUTPUTJS)"
@@ -40,5 +44,9 @@ echo "  Filesize: $(stat --printf="%s" ../$OUTPUTJS)"
 echo "--> Minified & compressed file: "
 echo "  Filename: $OUTPUTJSMIN"
 echo "  Filesize: $(stat --printf="%s" ../$OUTPUTJSMIN)"
+
+echo "--> Minified & compressed & GZIP file: "
+echo "  Filename: $OUTPUTJSMIN.gz"
+echo "  Filesize: $(stat --printf="%s" ../$OUTPUTJSMIN.gz)"
 
 cd $CURRENT

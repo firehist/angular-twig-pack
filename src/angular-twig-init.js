@@ -47,7 +47,7 @@ angular.module('twig.directives', ['twig.config'])
 		* 
 		* @see http://twig.sensiolabs.org/doc/functions/random.html
 		*/
-		this.random = twigConfig['random'];
+		this['random']= twigConfig['random'];
 		/**
 		* divisibleby 
 		* 
@@ -55,7 +55,7 @@ angular.module('twig.directives', ['twig.config'])
 		* 
 		* @see http://twig.sensiolabs.org/doc/tests/divisibleby.html
 		*/
-		this.divisibleby = twigConfig['divisibleby'];
+		this['divisibleby'] = twigConfig['divisibleby'];
 		/**
 		* even 
 		* 
@@ -63,7 +63,7 @@ angular.module('twig.directives', ['twig.config'])
 		* 
 		* @see http://twig.sensiolabs.org/doc/tests/even.html
 		*/
-		this.even = twigConfig['even'];
+		this['even'] = twigConfig['even'];
 		/**
 		* even 
 		* 
@@ -71,14 +71,14 @@ angular.module('twig.directives', ['twig.config'])
 		* 
 		* @see http://twig.sensiolabs.org/doc/tests/odd.html
 		*/
-		this.odd = twigConfig['odd'];
+		this['odd'] = twigConfig['odd'];
 		
 		return this;
 	}]);
 angular.module('twig', ['twig.filters', 'twig.directives', 'twig.config']);
 // Some cross browser declaration
 if (angular.isUndefined(Array.range)) {
-	Array.range = function(a, b, step){
+	Array['range'] = function(a, b, step){
 		var A= [];
 		if(typeof a == 'number'){
 			A[0]= a;
@@ -98,8 +98,8 @@ if (angular.isUndefined(Array.range)) {
 		return A;
 	};
 }
-if(!String.prototype.trim) {
-	String.prototype.trim = function () {
+if(!String.prototype['trim']) {
+	String.prototype['trim'] = function () {
 		return this.replace(/^\s+|\s+$/g,'');
 	};
 }

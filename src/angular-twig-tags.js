@@ -243,24 +243,3 @@ angular.module('twig.directives').directive('macroSet', [
 			}
 		};
 	}]);
-
-/**
- * spaceless
- * 
- * Use the spaceless tag to remove whitespace between HTML tags, not whitespace within HTML tags or whitespace in plain text
- * 
- * @see http://twig.sensiolabs.org/doc/tags/spaceless.html
- * 
- */
-angular.module('twig.directives').directive('spaceless', [
-	'twig.config',
-	function (twigConfig) {
-		"use strict";
-		return {
-			scope:		false,
-			restrict:	'A',
-			link:		function($scope, $element, attr){
-				console.debug($element.html());
-			}
-		};
-	}]);
