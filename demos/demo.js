@@ -16,21 +16,12 @@ app.config(['$routeProvider', '$locationProvider', function( $routeProvider, $lo
 		.otherwise({ redirectTo: '/filters' });
 }]);
 
-app.service('pageService', function() {
-    var page = null;
-    this.getPage = function() { return page; };
-    this.isCurrentPage = function (currentPage) { return page == currentPage; };
-    this.setPage = function(newPage) { page = newPage; };
-});
-
-
 function MainCtrl($scope) {
     $scope.name = "angular-twig-pack";
     $scope.page = null;
 };
 
-function FunctionsCtrl($scope, pageService, twig) {
-    var namePage = 'Function';
+function FunctionsCtrl($scope, twig) {
 	
     var init = function() {
 		/**
@@ -62,13 +53,9 @@ function FunctionsCtrl($scope, pageService, twig) {
     };
 
 	init();
-    if (!pageService.isCurrentPage(namePage)) {
-        pageService.setPage(namePage);
-    }
 };
 
-function TagCtrl($scope, pageService) {
-    var namePage = 'Tags';
+function TagCtrl($scope) {
 	
     var init = function() {
 		/**
@@ -98,23 +85,19 @@ function TagCtrl($scope, pageService) {
 		$scope.macroCtrlTest = 'varFromCtrl';
     };
 
-    if (!pageService.isCurrentPage(namePage)) {
-        init();
-        pageService.setPage(namePage);
-    }
+	init();
 };
 
-function FilterCtrl($scope, $filter, pageService) {
-    var namePage = 'filter';
+function FilterCtrl($scope, $filter) {
 
 	var init = function() {
 		// url_encode
 		$scope.strUrlEncode = 'http://w3schools.com/my test.asp?name=ståle&car=saab';
 		console.debug('Filter url_encode', $scope.strUrlEncode, $filter('url_encode')($scope.strUrlEncode));
 
-		// json_encode (angular provide fromJson to do this)
+		// json_decode (angular provide fromJson to do this)
 		$scope.strJsonEncode = '{"key":["Thierry","Jacques"],"v":0}';
-		console.debug('Filter json_encode:', $scope.strJsonEncode, $filter('json_encode')($scope.strJsonEncode));
+		console.debug('Filter json_decode:', $scope.strJsonEncode, $filter('json_decode')($scope.strJsonEncode));
 
 		// title (uppercase first letter of each word)
 		$scope.strTitle = 'my title to titled';
@@ -210,9 +193,6 @@ function FilterCtrl($scope, $filter, pageService) {
 		console.debug('Filter slice char_mask', $scope.strTrimString, '___', $filter('trim')($scope.strTrimString, '.'));
 	};
 
-    if (!pageService.isCurrentPage(namePage)) {
-        init();
-        pageService.setPage(namePage);
-    }
+	init();
 	
 }

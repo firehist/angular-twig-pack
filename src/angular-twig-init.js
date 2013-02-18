@@ -77,11 +77,11 @@ angular.module('twig.directives', ['twig.config'])
 	}]);
 angular.module('twig', ['twig.filters', 'twig.directives', 'twig.config']);
 // Some cross browser declaration
-if (angular.isUndefined(Array.range)) {
+if (angular.isUndefined(Array['range'])) {
 	Array['range'] = function(a, b, step){
 		var A= [];
-		if(typeof a == 'number'){
-			A[0]= a;
+		if(typeof a === 'number'){
+			A[0] = a;
 			step= step || 1;
 			while(a+step<= b){
 				A[A.length]= a+= step;

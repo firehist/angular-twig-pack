@@ -79,7 +79,7 @@ angular.module('twig.directives').directive('for', [
 					} else {
 						throw Error("Undefined values (" + firstItem + ", " + lastItem);
 					}
-					watchItems(angular.copy(Array.range(firstItem, lastItem)));
+					watchItems(angular.copy(Array['range'](firstItem, lastItem)));
 				} else {
 					var expr = expressionIf ? expressionIf[1] : expression[2];
 					// Set watch on value
@@ -87,7 +87,7 @@ angular.module('twig.directives').directive('for', [
 						watchItems(angular.copy(items));
 					});
 					$scope.$watch(expr + '.length', function(a) {
-						if (a != length) {
+						if (a !== length) {
 							watchItems(angular.copy($scope.$eval(expr)));
 						}
 					});

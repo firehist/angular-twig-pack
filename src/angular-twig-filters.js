@@ -49,7 +49,7 @@ angular.module('twig.filters').filter('url_encode', function () {
  *
  * @example: {'key':['Thierry', 'Jacques'],'v':0} | json_encode
  */
-angular.module('twig.filters').filter('json_encode', function () {
+angular.module('twig.filters').filter('json_decode', function () {
     return function (value) {
         if (!value) return value;
         var target = value.toString();
@@ -115,8 +115,8 @@ angular.module('twig.filters').filter('odd', ['twig.config', function (twigConfi
  * 
  * @param {number} value The number to test
  * 
- * @example: 6 | odd // true
- * @example: 5 | odd // false
+ * @example: 6 | even // false
+ * @example: 5 | even // true
  */
 angular.module('twig.filters').filter('even', ['twig.config', function (twigConfig) {
     return function (value) {
